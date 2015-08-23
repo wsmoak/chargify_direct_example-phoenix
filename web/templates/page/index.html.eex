@@ -26,11 +26,34 @@
   <p>Note: Use a card number of "1" for success, "2" for failure.</p>
   <p>Expiration Month: <input type="text" name="signup[payment_profile][expiration_month]" />
   Expiration Year: <input type="text" name="signup[payment_profile][expiration_year]" /></p>
-
-
   <p><input type="submit" value="Sign Up" /></p>
 </form>
 </div>
+
+<div>
+<h2>Sign Up With PayPal!</h2>
+<form method="post" action="https://api.chargify.com/api/v2/signups">
+  <!-- Secure parameters -->
+  <input type="hidden" name="secure[api_id]" value="<%= @api_id %>"/>
+  <input type="hidden" name="secure[timestamp]" value="<%= @timestamp %>" />
+  <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
+  <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
+  <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+
+  <!-- Resource parameters -->
+  <input type="hidden" name="signup[product][handle]" value="test-product-c" />
+  <h3>Customer Information</h3>
+  <p>First Name: <input type="text" name="signup[customer][first_name]" />
+  Last Name: <input type="text" name="signup[customer][last_name]" />
+  Email: <input type="text" name="signup[customer][email]" /></p>
+  <h3>Billing Information</h3>
+  <p>PayPal Nonce: <input type="text" name="signup[payment_profile][payment_method_nonce]" />
+  PayPal Email: <input type="text" name="signup[payment_profile][paypal_email]" /></p>
+  <p>Note: These will eventually be inserted into the page by the Braintree PayPal widget.</p>
+  <p><input type="submit" value="Sign Up" /></p>
+</form>
+</div>
+
 
 <div class="row marketing">
   <div class="col-lg-6">
