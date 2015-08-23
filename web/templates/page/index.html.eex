@@ -14,7 +14,7 @@
   <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
 
   <!-- Resource parameters -->
-  <input type="hidden" name="signup[product][handle]" value="basic" />
+  <input type="hidden" name="signup[product][handle]" value="test-product-a" />
   <h3>Customer Information</h3>
   <p>First Name: <input type="text" name="signup[customer][first_name]" />
   Last Name: <input type="text" name="signup[customer][last_name]" />
@@ -23,7 +23,7 @@
   <p>First Name: <input type="text" name="signup[payment_profile][first_name]" />
   Last Name: <input type="text" name="signup[payment_profile][last_name]" /></p>
   <p>Card Number: <input type="text" name="signup[payment_profile][card_number]" /></p>
-  <p>Note: Use a card number of "1" for success, "2" for failure.</p>
+  <p>Note: Use fake/test card numbers only!</p>
   <p>Expiration Month: <input type="text" name="signup[payment_profile][expiration_month]" />
   Expiration Year: <input type="text" name="signup[payment_profile][expiration_year]" /></p>
   <p><input type="submit" value="Sign Up" /></p>
