@@ -6,10 +6,14 @@ defmodule ChargifyDirectExample.PageController do
     |> render("thanks.html")
   end
 
-  # if the result code wasn't 2000 then we need to redisplay the form
-  def callback(conn, params) do
-    # TODO: display the errors
-    index(conn, params)
+  def callback(conn, %{"call_id" => call_id} ) do
+    response = ChargifyV2.get!("/calls/" <> call_id)
+    errors = response.body[:call]["response"]["result"]["errors"]
+    messages = Enum.map(errors, &Dict.fetch!(&1, "message"))
+
+    conn
+    |> put_flash(:error, Enum.join(messages," ") )
+    |> redirect(to: "/" )
   end
 
   def index(conn, _params) do
