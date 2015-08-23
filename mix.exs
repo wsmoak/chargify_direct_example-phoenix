@@ -18,7 +18,7 @@ defmodule ChargifyDirectExample.Mixfile do
   def application do
     [mod: {ChargifyDirectExample, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :chargify_v2]]
   end
 
   # Specifies which paths to compile per environment
@@ -35,6 +35,7 @@ defmodule ChargifyDirectExample.Mixfile do
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     { :uuid, "1.0.1" }]
+     {:uuid, "1.0.1" },
+     {:chargify_v2, path: "../chargify_v2", override: true}]
   end
 end

@@ -2,11 +2,15 @@
 
 Chargify Direct in Elixir Phoenix
 
-To start your Phoenix app:
+To start the Phoenix project:
 
-  1. Install dependencies with `mix deps.get`
-  2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+1. Set environment variables for `CHARGIFY_DIRECT_API_ID`, `CHARGIFY_DIRCT_API_SECRET` and `CHARGIFY_DIRECT_PASSWORD`
+
+2. Install dependencies with `mix deps.get`
+
+Note that both the Phoenix Framework and the Chargify V2 dependencies are pointed at the master branch of their respective git repos.  This means things may break!  If so, try editing mix.exs to point at the latest release or an earlier commit.
+
+3. Start the Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
