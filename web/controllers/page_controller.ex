@@ -22,6 +22,17 @@ defmodule ChargifyDirectExample.PageController do
     |> render("index.html")
   end
 
+  def update(conn, _params) do
+    conn
+    |> assign(:subscription_id, "9947614")
+    |> assign(:api_id, api_id)
+    |> assign(:timestamp, timestamp)
+    |> assign(:nonce, nonce)
+    |> assign(:secure_data, secure_data_for_update)
+    |> assign_secure_signature
+    |> render("update.html")
+  end
+
   # https://docs.chargify.com/chargify-direct-introduction#secure-parameters-signature
   # http://stackoverflow.com/questions/27082396/how-does-one-generate-an-hmac-string-in-elixir
   # http://www.erlang.org/doc/man/crypto.html
@@ -44,6 +55,10 @@ defmodule ChargifyDirectExample.PageController do
 
   defp secure_data do
     "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback"
+  end
+
+  defp secure_data_for_update do
+    "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback&subscription_id=9947614"
   end
 
   defp api_id do

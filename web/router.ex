@@ -18,6 +18,7 @@ defmodule ChargifyDirectExample.Router do
 
     get "/", PageController, :index
     get "/callback", PageController, :callback
+    get "/update", PageController, :update
   end
 
   # Other scopes may use custom stacks.
