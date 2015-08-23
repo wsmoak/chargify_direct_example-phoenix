@@ -22,13 +22,13 @@ defmodule ChargifyDirectExample.PageController do
     |> render("index.html")
   end
 
-  def update(conn, _params) do
+  def update(conn, %{"sub_id" => subscription_id} ) do
     conn
-    |> assign(:subscription_id, "9947614")
+    |> assign(:subscription_id, subscription_id)
     |> assign(:api_id, api_id)
     |> assign(:timestamp, timestamp)
     |> assign(:nonce, nonce)
-    |> assign(:secure_data, secure_data_for_update)
+    |> assign_secure_data_for_update
     |> assign_secure_signature
     |> render("update.html")
   end
@@ -57,8 +57,10 @@ defmodule ChargifyDirectExample.PageController do
     "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback"
   end
 
-  defp secure_data_for_update do
-    "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback&subscription_id=9947614"
+  defp assign_secure_data_for_update(conn) do
+    data = "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback&subscription_id=" <> conn.assigns.subscription_id
+
+    assign(conn, :secure_data, data)
   end
 
   defp api_id do
