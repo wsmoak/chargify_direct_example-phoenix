@@ -7,7 +7,7 @@ defmodule ChargifyDirectExample.PageController do
   end
 
   def callback(conn, %{"call_id" => call_id} ) do
-    response = ChargifyV2.get!("/calls/" <> call_id)
+    response = ChargifyV2.Calls.read!(call_id)
     errors = response.body[:call]["response"]["result"]["errors"]
     messages = Enum.map(errors, &Dict.fetch!(&1, "message"))
 
