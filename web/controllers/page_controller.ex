@@ -6,13 +6,10 @@ defmodule ChargifyDirectExample.PageController do
     |> render("thanks.html")
   end
 
-  def callback(conn, %{"call_id" => call_id} ) do
-    response = ChargifyV2.Calls.read!(call_id)
-    errors = response.body[:call]["response"]["result"]["errors"]
-    messages = Enum.map(errors, &Dict.fetch!(&1, "message"))
-
+  # The result code wasn't 2000 so there must be errors
+  def callback(conn, %{"call_id" => id} ) do
     conn
-    |> put_flash(:error, Enum.join(messages," ") )
+    |> put_flash(:error, error_messages_for_call(id) )
     |> redirect(to: "/" )
   end
 
@@ -79,6 +76,13 @@ defmodule ChargifyDirectExample.PageController do
   defp timestamp do
      {ms, s, _} = :os.timestamp
      (ms * 1_000_000) + s
+  end
+
+  # Returns a string with all error messages for the call
+  defp error_messages_for_call(id) do
+    ChargifyV2.Calls.read!(id)
+    |> ChargifyV2.Calls.error_messages
+    |> Enum.join(" ")
   end
 
 end
