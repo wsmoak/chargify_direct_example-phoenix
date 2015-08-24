@@ -11,7 +11,7 @@ def update_callback(conn, %{"result_code" => "2000"}) do
 
     #TODO: limit the number of API requests for the same call_id
     response = ChargifyV2.Calls.read!(call_id)
-    subscription_id = response.body[:call]["id"]
+    subscription_id = response.body[:call]["request"]["id"]
 
     conn
     |> put_flash(:error, error_messages_for_call(call_id) )
