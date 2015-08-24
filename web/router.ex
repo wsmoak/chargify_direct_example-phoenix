@@ -17,6 +17,7 @@ defmodule ChargifyDirectExample.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/update/callback", PageController, :update_callback
     get "/callback", PageController, :callback
     get "/update", PageController, :update
   end

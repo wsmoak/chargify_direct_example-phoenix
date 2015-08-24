@@ -1,6 +1,23 @@
 defmodule ChargifyDirectExample.PageController do
   use ChargifyDirectExample.Web, :controller
 
+def update_callback(conn, %{"result_code" => "2000"}) do
+    conn
+    |> render("thanks.html")
+  end
+
+  # The result code wasn't 2000 so there must be errors
+  def update_callback(conn, %{"call_id" => call_id} ) do
+
+    #TODO: limit the number of API requests for the same call_id
+    response = ChargifyV2.Calls.read!(call_id)
+    subscription_id = response.body[:call]["id"]
+
+    conn
+    |> put_flash(:error, error_messages_for_call(call_id) )
+    |> redirect(to: "/update?sub_id=#{subscription_id}" )
+  end
+
   def callback(conn, %{"result_code" => "2000"}) do
     conn
     |> render("thanks.html")
@@ -59,7 +76,7 @@ defmodule ChargifyDirectExample.PageController do
   end
 
   defp assign_secure_data_for_update(conn) do
-    data = "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fcallback&subscription_id=" <> conn.assigns.subscription_id
+    data = "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fupdate%2Fcallback&amp;subscription_id=" <> conn.assigns.subscription_id
 
     assign(conn, :secure_data, data)
   end
