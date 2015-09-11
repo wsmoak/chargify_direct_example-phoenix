@@ -49,6 +49,8 @@
   <h3>Billing Information</h3>
   <p>PayPal Nonce: <input type="text" name="signup[payment_profile][payment_method_nonce]" />
   PayPal Email: <input type="text" name="signup[payment_profile][paypal_email]" /></p>
+  <input type="hidden" name="signup[payment_profile][payment_type]" value="paypal_account" />
+
   <p>Note: These will eventually be inserted into the page by the Braintree PayPal widget.</p>
   <p><input type="submit" value="Sign Up" /></p>
 </form>
