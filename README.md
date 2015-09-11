@@ -14,6 +14,8 @@ Note that both the Phoenix Framework and the Chargify V2 dependencies are pointe
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+See the 'util' directory for a Ruby script to generate the client token until there is an Elixir library to do it on the server side.
+
 ## References
 
   * https://docs.chargify.com/chargify-direct-introduction
