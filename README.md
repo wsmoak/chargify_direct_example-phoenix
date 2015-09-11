@@ -23,3 +23,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
   * http://elixir-lang.org/getting-started/basic-operators.html
   * http://elixir-lang.org/docs/v1.0/elixir/Integer.html#to_string/1
   * https://github.com/zyro/elixir-uuid
+  * https://developers.braintreepayments.com/javascript+ruby/start/hello-client
+  * https://developers.braintreepayments.com/javascript+ruby/start/hello-server
+  * https://developers.braintreepayments.com/javascript+ruby/guides/paypal/client-side

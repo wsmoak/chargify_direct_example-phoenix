@@ -47,11 +47,24 @@
   Last Name: <input type="text" name="signup[customer][last_name]" />
   Email: <input type="text" name="signup[customer][email]" /></p>
   <h3>Billing Information</h3>
-  <p>PayPal Nonce: <input type="text" name="signup[payment_profile][payment_method_nonce]" />
-  PayPal Email: <input type="text" name="signup[payment_profile][paypal_email]" /></p>
+  <p>PayPal Nonce: <input id="paypal_nonce" type="text" name="signup[payment_profile][payment_method_nonce]" />
+  (Note: this field is visible for testing purposes only.)</p>
+  <p>PayPal Email: <input type="text" name="signup[payment_profile][paypal_email]" />
+  (Note: This field is required by Chargify but is only used for display.</p>
   <input type="hidden" name="signup[payment_profile][payment_type]" value="paypal_account" />
 
-  <p>Note: These will eventually be inserted into the page by the Braintree PayPal widget.</p>
+  <div id="paypal-container"></div>
+  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+  <script type="text/javascript">
+    braintree.setup( "<%= @client_token %>" , "paypal", {
+      container: "paypal-container",
+      paymentMethodNonceInputField: "paypal_nonce",
+      onPaymentMethodReceived: function (obj) {
+        doSomethingWithTheNonce(obj.nonce);
+      }
+    });
+  </script>
+
   <p><input type="submit" value="Sign Up" /></p>
 </form>
 </div>
