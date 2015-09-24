@@ -26,6 +26,9 @@
   <p>Note: Use fake/test card numbers only!</p>
   <p>Expiration Month: <input type="text" name="signup[payment_profile][expiration_month]" />
   Expiration Year: <input type="text" name="signup[payment_profile][expiration_year]" /></p>
+
+  <!-- Test a component -->
+  <p>Component Qty: <input type="text" name="signup[components][101790]" /></p>
   <p><input type="submit" value="Sign Up" /></p>
 </form>
 </div>
