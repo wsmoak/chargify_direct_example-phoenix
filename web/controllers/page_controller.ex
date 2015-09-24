@@ -49,6 +49,7 @@ def update_callback(conn, %{"result_code" => "2000"}) do
     |> assign(:nonce, nonce)
     |> assign_secure_data_for_update
     |> assign_secure_signature
+    |> assign(:client_token, client_token)
     |> render("update.html")
   end
 
@@ -105,6 +106,7 @@ def update_callback(conn, %{"result_code" => "2000"}) do
   # Returns a string with all error messages for the call
   defp error_messages_for_call(id) do
     ChargifyV2.Calls.read!(id)
+    |> IO.inspect
     |> ChargifyV2.Calls.error_messages
     |> Enum.join(" ")
   end
