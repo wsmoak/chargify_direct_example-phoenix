@@ -29,6 +29,8 @@
 
   <!-- Test a component -->
   <p>Component Qty: <input type="text" name="signup[components][101790]" /></p>
+  <!-- Test a custom field -->
+  <p>New Field 1001: <input type="text" name="signup[metafields][newfield1001]" />
   <p><input type="submit" value="Sign Up" /></p>
 </form>
 </div>
