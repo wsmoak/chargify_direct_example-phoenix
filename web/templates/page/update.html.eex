@@ -22,6 +22,8 @@
   <p>Expiration Month: <input type="text" name="payment_profile[expiration_month]" />
   Expiration Year: <input type="text" name="payment_profile[expiration_year]" /></p>
   <p>CVV: <input type="text" name="payment_profile[cvv]" /></p>
+  <p>State: <input type="text" name="payment_profile[billing_state]" /></p>
+  <p>ZIP Code: <input type="text" name="payment_profile[billing_zip]" /></p>
 
   <p><input type="submit" value="Submit" /></p>
 </form>
