@@ -63,6 +63,7 @@
   <script type="text/javascript">
     braintree.setup( "<%= @client_token %>" , "paypal", {
       container: "paypal-container",
+      locale: "de_de",
       paymentMethodNonceInputField: "paypal_nonce",
       onPaymentMethodReceived: function (obj) {
         doSomethingWithTheNonce(obj.nonce);
