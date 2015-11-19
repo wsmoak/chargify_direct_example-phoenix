@@ -27,6 +27,8 @@
   <p>Expiration Month: <input type="text" name="signup[payment_profile][expiration_month]" />
   Expiration Year: <input type="text" name="signup[payment_profile][expiration_year]" /></p>
 
+  <!-- Test calendar billing / snap day -->
+  <p>Calendar Billing Snap Day: <input type="text" name="signup[subscription][snap_day]" /></p>
   <!-- Test a component -->
   <p>Component Qty: <input type="text" name="signup[components][101790]" /></p>
   <!-- Test a custom field -->
