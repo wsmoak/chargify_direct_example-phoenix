@@ -34,7 +34,8 @@ def update_callback(conn, %{"result_code" => "2000"}) do
     conn
     |> assign(:api_id, api_id)
     |> assign(:timestamp, timestamp)
-    |> assign(:nonce, nonce)
+    |> assign(:nonce, uuid)
+    |> assign(:uniqueness_token, uuid)
     |> assign(:secure_data, secure_data)
     |> assign_secure_signature
     |> assign(:client_token, client_token)
@@ -46,7 +47,8 @@ def update_callback(conn, %{"result_code" => "2000"}) do
     |> assign(:subscription_id, subscription_id)
     |> assign(:api_id, api_id)
     |> assign(:timestamp, timestamp)
-    |> assign(:nonce, nonce)
+    |> assign(:nonce, uuid)
+    |> assign(:uniqueness_token, uuid)
     |> assign_secure_data_for_update
     |> assign_secure_signature
     |> assign(:client_token, client_token)
@@ -69,7 +71,7 @@ def update_callback(conn, %{"result_code" => "2000"}) do
   end
 
   # https://github.com/zyro/elixir-uuid
-  defp nonce do
+  defp uuid do
     UUID.uuid1()
   end
 

@@ -12,6 +12,7 @@
   <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
   <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
   <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
 
   <!-- Resource parameters -->
   <input type="hidden" name="signup[product][handle]" value="test-product-a" />
@@ -46,6 +47,7 @@
   <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
   <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
   <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
 
   <!-- Resource parameters -->
   <input type="hidden" name="signup[product][handle]" value="test-product-c" />
@@ -86,6 +88,7 @@
   <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
   <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
   <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
 
   <!-- Resource parameters -->
   <p>Product Handle: <input type="text" name="signup[product][handle]" value="test-product-b" />
