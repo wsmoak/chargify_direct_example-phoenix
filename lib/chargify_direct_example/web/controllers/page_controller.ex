@@ -13,6 +13,18 @@ defmodule ChargifyDirectExample.Web.PageController do
     |> render("index.html")
   end
 
+  def callback(conn, %{"result_code" => "2000"}) do
+    conn
+    |> render("thanks.html")
+  end
+
+  # The result code wasn't 2000 so there must be errors
+  def callback(conn, %{"call_id" => id} ) do
+    conn
+    |> put_flash(:error, error_messages_for_call(id) )
+    |> redirect(to: "/" )
+  end
+
   defp api_id do
     System.get_env("CHARGIFY_DIRECT_API_ID")
   end
@@ -49,6 +61,14 @@ defmodule ChargifyDirectExample.Web.PageController do
 
   defp api_secret do
     System.get_env("CHARGIFY_DIRECT_API_SECRET")
+  end
+
+  # Returns a string with all error messages for the call
+  defp error_messages_for_call(id) do
+    ChargifyV2.Calls.read!(id)
+    |> IO.inspect
+    |> ChargifyV2.Calls.error_messages
+    |> Enum.join(" ")
   end
 
   # Hard code Braintree client token generated at command prompt with ruby
