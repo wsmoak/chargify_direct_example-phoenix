@@ -1,6 +1,44 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2>Chargify Direct Examples</h2>
+  <p class="lead">... in Elixir using the Phoenix Framework v1.3</p>
+</div>
+
+<div>
+<h2>Sign Up With a Credit Card!</h2>
+<form method="post" action="https://api.chargify.com/api/v2/signups">
+  <!-- Secure parameters -->
+  <input type="hidden" name="secure[api_id]" value="<%= @api_id %>"/>
+  <input type="hidden" name="secure[timestamp]" value="<%= @timestamp %>" />
+  <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
+  <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
+  <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
+
+  <!-- Resource parameters -->
+  <input type="hidden" name="signup[product][handle]" value="test-product-a" />
+  <h3>Customer Information</h3>
+  <p>
+    First Name: <input type="text" name="signup[customer][first_name]" />
+    Last Name: <input type="text" name="signup[customer][last_name]" />
+    Email: <input type="text" name="signup[customer][email]" />
+    Phone: <input type="text" name="signup[customer][phone]" />
+  </p>
+  <h3>Billing Information</h3>
+  <p>First Name: <input type="text" name="signup[payment_profile][first_name]" />
+  Last Name: <input type="text" name="signup[payment_profile][last_name]" /></p>
+  <p>Card Number: <input type="text" name="signup[payment_profile][card_number]" /></p>
+  <p>Note: Use fake/test card numbers only!</p>
+  <p>Expiration Month: <input type="text" name="signup[payment_profile][expiration_month]" />
+  Expiration Year: <input type="text" name="signup[payment_profile][expiration_year]" /></p>
+
+  <!-- Test calendar billing / snap day -->
+  <p>Calendar Billing Snap Day: <input type="text" name="signup[subscription][snap_day]" /></p>
+  <!-- Test a component -->
+  <p>Component Qty: <input type="text" name="signup[components][101790]" /></p>
+  <!-- Test a custom field -->
+  <p>New Field 1001: <input type="text" name="signup[metafields][newfield1001]" />
+  <p><input type="submit" value="Sign Up" /></p>
+</form>
 </div>
 
 <div class="row marketing">
