@@ -18,7 +18,9 @@ defmodule ChargifyDirectExample.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
+
+      import Ecto
     end
   end
 
@@ -27,7 +29,7 @@ defmodule ChargifyDirectExample.Web do
       use Phoenix.Controller
 
       alias ChargifyDirectExample.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 1, from: 2]
 
       import ChargifyDirectExample.Router.Helpers
@@ -59,7 +61,7 @@ defmodule ChargifyDirectExample.Web do
       use Phoenix.Channel
 
       alias ChargifyDirectExample.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 1, from: 2]
 
     end
