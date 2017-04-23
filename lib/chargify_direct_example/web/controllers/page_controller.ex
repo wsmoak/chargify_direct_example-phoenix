@@ -25,6 +25,38 @@ defmodule ChargifyDirectExample.Web.PageController do
     |> redirect(to: "/" )
   end
 
+  def update(conn, %{"sub_id" => subscription_id} ) do
+    conn
+    |> assign(:subscription_id, subscription_id)
+    |> assign(:api_id, api_id)
+    |> assign(:timestamp, timestamp)
+    |> assign(:nonce, uuid)
+    |> assign(:uniqueness_token, uuid)
+    |> assign_secure_data_for_update
+    |> assign_secure_signature
+    |> assign(:client_token, client_token)
+    |> render("update.html")
+  end
+
+  def update_callback(conn, %{"result_code" => "2000"}) do
+    conn
+    |> render("thanks.html")
+  end
+
+  # The result code wasn't 2000 so there must be errors
+  def update_callback(conn, %{"call_id" => call_id} ) do
+
+    #TODO: limit the number of API requests for the same call_id
+    response = ChargifyV2.Calls.read!(call_id)
+    subscription_id = response.body[:call]["request"]["id"]
+
+    conn
+    |> put_flash(:error, error_messages_for_call(call_id) )
+    |> redirect(to: "/update?sub_id=#{subscription_id}" )
+  end
+
+  # private
+
   defp api_id do
     System.get_env("CHARGIFY_DIRECT_API_ID")
   end
@@ -48,6 +80,12 @@ defmodule ChargifyDirectExample.Web.PageController do
     document = conn.assigns.api_id <> to_string(conn.assigns.timestamp) <> conn.assigns.nonce <> conn.assigns.secure_data
 
     assign(conn, :secure_signature, secure_signature(document) )
+  end
+
+  defp assign_secure_data_for_update(conn) do
+    data = "subscription_id=" <> conn.assigns.subscription_id <> "&redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fupdate%2Fcallback"
+
+    assign(conn, :secure_data, data)
   end
 
   # https://docs.chargify.com/chargify-direct-introduction#secure-parameters-signature
