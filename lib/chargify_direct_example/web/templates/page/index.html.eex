@@ -40,3 +40,65 @@
   <p><input type="submit" value="Sign Up" /></p>
 </form>
 </div>
+
+<div>
+<h2>Sign Up With PayPal!</h2>
+<form method="post" action="https://api.chargify.com/api/v2/signups">
+  <!-- Secure parameters -->
+  <input type="hidden" name="secure[api_id]" value="<%= @api_id %>"/>
+  <input type="hidden" name="secure[timestamp]" value="<%= @timestamp %>" />
+  <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
+  <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
+  <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
+
+  <!-- Resource parameters -->
+  <input type="hidden" name="signup[product][handle]" value="test-product-c" />
+  <h3>Customer Information</h3>
+  <p>First Name: <input type="text" name="signup[customer][first_name]" />
+  Last Name: <input type="text" name="signup[customer][last_name]" />
+  Email: <input type="text" name="signup[customer][email]" /></p>
+  <h3>Billing Information</h3>
+  <p>PayPal Nonce: <input id="paypal_nonce" type="text" name="signup[payment_profile][payment_method_nonce]" />
+  (Note: this field is visible for testing purposes only.)</p>
+  <p>PayPal Email: <input type="text" name="signup[payment_profile][paypal_email]" />
+  (Note: This field is required by Chargify but is only used for display.</p>
+  <input type="hidden" name="signup[payment_profile][payment_type]" value="paypal_account" />
+
+  <div id="paypal-container"></div>
+  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+  <script type="text/javascript">
+    braintree.setup( "<%= @client_token %>" , "paypal", {
+      container: "paypal-container",
+      locale: "de_de",
+      paymentMethodNonceInputField: "paypal_nonce",
+      onPaymentMethodReceived: function (obj) {
+        doSomethingWithTheNonce(obj.nonce);
+      }
+    });
+  </script>
+
+  <p><input type="submit" value="Sign Up" /></p>
+</form>
+</div>
+
+<div>
+<h2>Existing Customer Sign Up!</h2>
+<form method="post" action="https://api.chargify.com/api/v2/signups">
+  <!-- Secure parameters -->
+  <input type="hidden" name="secure[api_id]" value="<%= @api_id %>"/>
+  <input type="hidden" name="secure[timestamp]" value="<%= @timestamp %>" />
+  <input type="hidden" name="secure[nonce]"     value="<%= @nonce %>" />
+  <input type="hidden" name="secure[data]" value="<%= @secure_data %>"/>
+  <input type="hidden" name="secure[signature]" value="<%= @secure_signature %>"/>
+  <input type="hidden" name="uniqueness_token" value="<%= @uniqueness_token %>" />
+
+  <!-- Resource parameters -->
+  <p>Product Handle: <input type="text" name="signup[product][handle]" value="test-product-b" />
+  <p>Customer Reference: <input type="text" name="signup[customer][reference]" /> or
+  Customer ID: <input type="text" name="signup[customer][id]" />
+  </p>
+  <p>Payment Profile ID:<input type="text" name="signup[payment_profile][id]" /></p>
+  <p><input type="submit" value="Sign Up" /></p>
+</form>
+</div>
