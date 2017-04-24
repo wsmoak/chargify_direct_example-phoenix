@@ -1,19 +1,34 @@
-# ChargifyDirectExample
+# ChargifyDirectExamples
 
-To start your Phoenix server:
+Chargify Direct in Elixir and Phoenix
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+To start the Phoenix project:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+1. Set environment variables for `CHARGIFY_DIRECT_API_ID`, `CHARGIFY_DIRCT_API_SECRET` and `CHARGIFY_DIRECT_PASSWORD`
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+2. Install dependencies with `mix deps.get` and `cd assets && npm install`
 
-## Learn more
+Note that both the Phoenix Framework and the Chargify V2 dependencies are pointed at the master branch of their respective git repos.  This means things may break!  If so, try editing mix.exs to point at the latest release or an earlier commit.
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+3. Start the Phoenix 1.3 endpoint with `mix phx.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser to create a subscription.
+
+Or visit http://localhost:4000/update?sub=12345 with an existing subscription id to update the payment profile information.
+
+See the 'util' directory for a Ruby script to generate the Braintree client token until there is an Elixir library to do it on the server side.
+
+The get-call.sh script can be used to retrieve information about the results of an api call. Set the CALL_ID environment variable before executing it.
+
+## References
+
+  * https://docs.chargify.com/chargify-direct-introduction
+  * http://stackoverflow.com/questions/27082396/how-does-one-generate-an-hmac-string-in-elixir
+  * http://www.erlang.org/doc/man/crypto.html
+  * http://essenciary.com/elixir-current-unix-timestamp/
+  * http://elixir-lang.org/getting-started/basic-operators.html
+  * http://elixir-lang.org/docs/v1.0/elixir/Integer.html#to_string/1
+  * https://github.com/zyro/elixir-uuid
+  * https://developers.braintreepayments.com/javascript+ruby/start/hello-client
+  * https://developers.braintreepayments.com/javascript+ruby/start/hello-server
+  * https://developers.braintreepayments.com/javascript+ruby/guides/paypal/client-side
