@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    braintree (2.74.0)
+      builder (>= 2.0.0)
+    builder (3.2.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  braintree
+
+BUNDLED WITH
+   1.14.6
